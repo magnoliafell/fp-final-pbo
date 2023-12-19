@@ -183,7 +183,12 @@ public class KeyInput extends KeyAdapter {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-
+//        if (key == KeyEvent.VK_ESCAPE) {
+//        	
+//        }
+//        if (key == KeyEvent.VK_ENTER) {
+//        	
+//        }
         for (gameObject obj : handler.getGameObject()) {
             if (obj.getId() == objectId.imroatus) {
                 Imroatus imroatus = (Imroatus) obj;

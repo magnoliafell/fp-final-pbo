@@ -23,8 +23,8 @@ public class Imroatus extends gameObject {
 	private Animation imr_walk;
 	private boolean forward=false;
 	private gameEngine game;
-	
-	
+	private Coin coin;
+	private int points;
 	public int jumpCount = 0;
 	public boolean jumping = false;
 	public boolean canJump = true;
@@ -45,7 +45,7 @@ public class Imroatus extends gameObject {
 		this.handler= handler;
 		text= gameEngine.getTex();
 		sprite= text.getImroatus_1();
-		
+		points = 0;
 		imr_walk = new Animation(9, sprite[1], sprite[2], sprite[3], sprite[4]);
 		currSprite = sprite;
 		currAnimation = imr_walk;
@@ -55,9 +55,12 @@ public class Imroatus extends gameObject {
 	@Override
 	public void tick() {
 		if (!jumping) {
-            jumpCount = 0; // Reset jump count
-            canJump = true; // Enable jumping when the character is on the ground
-        }
+            jumpCount = 0; 
+            canJump = true; 
+		}
+		if (getX() <= 0) {
+	        setX(0);
+	    }
 	    setX((float) (getVelX() + getX()));
 	    setY((float) (getVelY() + getY()));
 	    applyGravity();
@@ -88,9 +91,14 @@ public class Imroatus extends gameObject {
 		}else {
 			g.drawImage(currSprite[0], (int) getX(), (int) getY(), (int) getWidth(), (int) getHeight(), null);
 		}
-		
+//		
 //		showBounds(g);
 	}
+	
+	public void acquirePoints(int point){
+        points = points + point;
+    }
+
 
 	@Override
 	public Rectangle getBounds() {
@@ -149,6 +157,29 @@ private void showBounds(Graphics g) {
 					setX((float) (temp.getX()+getWidth()));
 				}
 			}
+	        
+//	        if (temp.getId() == objectId.coin) {
+//	            if (getBounds().intersects(temp.getBounds())) {
+//	                setY((float) (temp.getY() - getHeight()));
+//	                setVelY(0);
+//	                coin.setY(-6000);
+//	                jumping = false;
+//	                canJump = true;
+//	            }
+//	            if (getBoundsTop().intersects(temp.getBounds())) {
+//	                setY((float) (temp.getY() + temp.getHeight()));
+//	                setVelY(0);
+//	                
+//	            }
+//				if(getBoundsRight().intersects(temp.getBounds())) {
+//					setX((float) (temp.getX()- getWidth()));
+//					
+//				}
+//				if(getBoundsLeft().intersects(temp.getBounds())) {
+//					setX((float) (temp.getX()+getWidth()));
+//				}
+//			}
+//	        
 	        if (temp.getId() == objectId.guraGurita) {
 	            if (getBounds().intersects(temp.getBounds())) {
 	                setY((float) (temp.getY() - getHeight()));
@@ -161,14 +192,24 @@ private void showBounds(Graphics g) {
 					 setX(-6000);
 				}
 			}
+	        
+//	        if (temp.getId() == objectId.coin) {
+//				if(getBoundsRight().intersects(temp.getBounds())) {
+//					setX((float) (temp.getX()- getWidth()));
+//				}
+//				if(getBoundsLeft().intersects(temp.getBounds())) {
+//					setX((float) (temp.getX()- getWidth()));
+//				}
+//			}
+	       
 		}
 	}
 	
 	public void jump() {
-        if (!jumping && canJump) { // If not already jumping and can jump
-            setVelY(-10); // Adjust this value as needed for jump height
+        if (!jumping && canJump) { 
+            setVelY(-10); 
             jumping = true;
-            canJump = false; // Disable double jump until landing
+            canJump = false; 
         }
     }
 

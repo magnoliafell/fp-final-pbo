@@ -6,14 +6,15 @@ public class Texture {
 	private static final String rootFolder = "/media";
 	private final int imroatus_count=8;
 	private final int tile_1_count =7;
-	private final int tile_2_count =2;
+	private final int tile_2_count =4;
 	private final int gura_count=3;
-	private final int coin_count=10;
-	
+	private final int coin_count=14;
+	private final int hiasan_count=4;
+			
 	private BufferImageLoader load;
-	private BufferedImage imroatus, gura, brick, stone, game_over, intro, coin;
+	private BufferedImage imroatus, gura, brick, stone, game_over, intro, coin, hiasan;
 	
-	public BufferedImage[] imroatus_1, tile_1, tile_2, stone_1, gura_1, coin_1;
+	public BufferedImage[] imroatus_1, tile_1, tile_2, stone_1, gura_1, coin_1, hiasan_1;
 	
 	public BufferedImage getCoin() {
 		return coin;
@@ -46,7 +47,7 @@ public class Texture {
 //		tile_2 = new BufferedImage[tile_1_count+tile_2_count];
 		stone_1 = new BufferedImage [1];
 		coin_1 = new BufferedImage[coin_count];
-		
+		hiasan_1 = new BufferedImage[hiasan_count];
 		
 		load = new BufferImageLoader();
 		
@@ -56,6 +57,7 @@ public class Texture {
 			brick=load.loadImage(rootFolder+"/"+"ground.png");
 			gura=load.loadImage(rootFolder+"/"+"gura2.png");
 			coin=load.loadImage(rootFolder+"/"+"koin.png");
+			hiasan=load.loadImage(rootFolder+"/"+"hiasan2.png");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -64,8 +66,30 @@ public class Texture {
 		getGuraTexture();
 		getStoneTexture();
 		getCoinTexture();
+		getHiasanTexture();
 	}
 	
+	private void getHiasanTexture() {
+		int x_off= 0;
+		int y_off=0;
+		int width=96;
+		int height=96;
+		
+		for ( int i=0; i<tile_2_count; i++) {
+			hiasan_1[i]= hiasan.getSubimage(x_off+i*(width), y_off, width, height);
+			
+		}
+		
+	}
+
+	public BufferedImage[] getHiasan_1() {
+		return hiasan_1;
+	}
+
+	public void setHiasan_1(BufferedImage[] hiasan_1) {
+		this.hiasan_1 = hiasan_1;
+	}
+
 	private void getStoneTexture() {
 		// TODO Auto-generated method stub
 		
@@ -150,8 +174,8 @@ public class Texture {
 	private void getCoinTexture(){
 		int x_off=0;
 		int y_off=0;
-		int width=32;
-		int height=32;
+		int width=48;
+		int height=48;
 		
 		for ( int i=0; i<coin_count; i++) {
 			coin_1[i]= coin.getSubimage(x_off+i*(width), y_off, width, height);
@@ -258,6 +282,18 @@ public class Texture {
 
 	public BufferedImage getGura() {
 		return gura;
+	}
+
+	public BufferedImage getHiasan() {
+		return hiasan;
+	}
+
+	public void setHiasan(BufferedImage hiasan) {
+		this.hiasan = hiasan;
+	}
+
+	public int getHiasan_count() {
+		return hiasan_count;
 	}
 
 	

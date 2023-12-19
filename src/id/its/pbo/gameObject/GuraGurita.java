@@ -45,15 +45,13 @@ public class GuraGurita extends gameObject {
 		 	setVelX(speed); 
 		 	
 		 	}
-			// Set a constant velocity to move continuously
 			setX((float) (getX() + getVelX())); 
-	        // Move the object
-	        // Update the X position continuously
-	       setY((float) (getY() + getVelY())); // Apply vertical movement or gravity (adjust as needed)
-	        applyGravity(); // Apply gravity logic
 
-	        Collision(); // Handle collisions
-	        currAnimation.runAnimation(); // Run animation
+	       setY((float) (getY() + getVelY())); 
+	        applyGravity(); 
+
+	        Collision();
+	        currAnimation.runAnimation();
 	}
 
 	@Override
